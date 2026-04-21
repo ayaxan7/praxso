@@ -98,7 +98,7 @@ fun CorrelationRow(label: String, count: Int, color: Color) {
 
 @Composable
 private fun CustomIcon(icon: ImageVector, contentDescription: String?, size: Dp, tint: Color) {
-    androidx.compose.material3.Icon(
+   Icon(
         imageVector = icon,
         contentDescription = contentDescription,
         modifier = Modifier.size(size),

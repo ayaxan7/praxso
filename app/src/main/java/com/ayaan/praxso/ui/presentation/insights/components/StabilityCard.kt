@@ -102,16 +102,7 @@ fun StabilityChart() {
     Canvas(modifier = Modifier.fillMaxSize()) {
         val width = size.width
         val height = size.height
-        
-        val points = listOf(
-            0.8f to 0.7f,
-            0.2f to 0.6f,
-            0.4f to 0.5f,
-            0.6f to 0.65f,
-            0.8f to 0.3f,
-            1.0f to 0.2f
-        )
-        
+
         val path = Path().apply {
             moveTo(0f, height * 0.8f)
             cubicTo(

@@ -1,10 +1,18 @@
 package com.ayaan.praxso.ui.presentation.insights.components
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -14,7 +22,13 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ayaan.praxso.ui.theme.*
+import com.ayaan.praxso.ui.theme.CardBackground
+import com.ayaan.praxso.ui.theme.DonutGreen
+import com.ayaan.praxso.ui.theme.DonutPink
+import com.ayaan.praxso.ui.theme.DonutPurple
+import com.ayaan.praxso.ui.theme.DonutRed
+import com.ayaan.praxso.ui.theme.TextPrimary
+import com.ayaan.praxso.ui.theme.TextSecondary
 
 @Composable
 fun SymptomTrendsCard() {
@@ -40,22 +54,18 @@ fun SymptomTrendsCard() {
                     color = TextPrimary
                 )
                 Text(
-                    text = "Compared to last cycle",
-                    fontSize = 14.sp,
-                    color = TextSecondary
+                    text = "Compared to last cycle", fontSize = 14.sp, color = TextSecondary
                 )
-                
+
                 Spacer(modifier = Modifier.height(24.dp))
-                
+
                 Box(
-                    modifier = Modifier.fillMaxWidth().height(250.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(250.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     SymptomDonutChart()
-                    
-                    // Center hole content or labels
-                    // Labels are outside in the design, I'll place them using Box offsets
-                    
                     SymptomLabel("30%\nMood", Alignment.TopStart, offset = Offset(-20f, 40f))
                     SymptomLabel("31%\nBloating", Alignment.TopEnd, offset = Offset(20f, 60f))
                     SymptomLabel("17%\nAcne", Alignment.BottomStart, offset = Offset(-20f, -40f))
@@ -71,15 +81,16 @@ data class Offset(val x: Float, val y: Float)
 @Composable
 fun SymptomLabel(text: String, alignment: Alignment, offset: Offset) {
     Box(
-        modifier = Modifier
-            .padding(16.dp)
-            // Using Box with alignment and padding for positioning
+        modifier = Modifier.padding(16.dp)
+        // Using Box with alignment and padding for positioning
     ) {
         Card(
             shape = RoundedCornerShape(50),
             colors = CardDefaults.cardColors(containerColor = Color.White),
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-            modifier = Modifier.align(alignment).offset(offset.x.dp, offset.y.dp)
+            modifier = Modifier
+                .align(alignment)
+                .offset(offset.x.dp, offset.y.dp)
         ) {
             Text(
                 text = text,
@@ -97,41 +108,29 @@ fun SymptomLabel(text: String, alignment: Alignment, offset: Offset) {
 fun SymptomDonutChart() {
     Canvas(modifier = Modifier.size(200.dp)) {
         val strokeWidth = 40.dp.toPx()
-        
+
         // Mood (Pink)
         drawArc(
-            color = DonutPink,
-            startAngle = 180f,
-            sweepAngle = 108f, // 30%
-            useCenter = false,
-            style = Stroke(width = strokeWidth, cap = StrokeCap.Butt)
+            color = DonutPink, startAngle = 180f, sweepAngle = 108f, // 30%
+            useCenter = false, style = Stroke(width = strokeWidth, cap = StrokeCap.Butt)
         )
-        
+
         // Bloating (Purple)
         drawArc(
-            color = DonutPurple,
-            startAngle = 288f,
-            sweepAngle = 111.6f, // 31%
-            useCenter = false,
-            style = Stroke(width = strokeWidth, cap = StrokeCap.Butt)
+            color = DonutPurple, startAngle = 288f, sweepAngle = 111.6f, // 31%
+            useCenter = false, style = Stroke(width = strokeWidth, cap = StrokeCap.Butt)
         )
-        
+
         // Fatigue (Red)
         drawArc(
-            color = DonutRed,
-            startAngle = 39.6f,
-            sweepAngle = 75.6f, // 21%
-            useCenter = false,
-            style = Stroke(width = strokeWidth, cap = StrokeCap.Butt)
+            color = DonutRed, startAngle = 39.6f, sweepAngle = 75.6f, // 21%
+            useCenter = false, style = Stroke(width = strokeWidth, cap = StrokeCap.Butt)
         )
-        
+
         // Acne (Green)
         drawArc(
-            color = DonutGreen,
-            startAngle = 115.2f,
-            sweepAngle = 64.8f, // 17%
-            useCenter = false,
-            style = Stroke(width = strokeWidth, cap = StrokeCap.Butt)
+            color = DonutGreen, startAngle = 115.2f, sweepAngle = 64.8f, // 17%
+            useCenter = false, style = Stroke(width = strokeWidth, cap = StrokeCap.Butt)
         )
     }
 }
