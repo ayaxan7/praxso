@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import com.ayaan.praxso.ui.presentation.insights.InsightsScreen
 import com.ayaan.praxso.ui.theme.PraxsoTheme
 
@@ -17,7 +18,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PraxsoTheme {
-                InsightsScreen()
+                SpeechScreen(
+                    navController = rememberNavController(),
+                    modifier=Modifier
+                )
             }
         }
     }
